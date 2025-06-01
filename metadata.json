@@ -1,0 +1,4 @@
+{
+  "name": "AI Animated Storyboard Generator",
+  "description": "A web application that takes user-provided story text, splits it into scenes, generates images for each scene using AI, and presents them as an animated storyboard."
+}

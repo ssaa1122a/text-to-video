@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Animated Storyboard Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Basic body styling to match app theme */
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        background-color: #111827; /* bg-gray-900 from App.tsx */
+        color: #f3f4f6; /* text-gray-100 from App.tsx */
+        margin: 0; /* Remove default margin */
+      }
+
+      /* Ensure root takes full height */
+      html, body, #root {
+        height: 100%;
+      }
+      #root {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Image Fade-In Animation */
+      @keyframes fadeInImage {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      .animate-fadeInImage {
+        animation: fadeInImage 0.5s ease-in-out forwards;
+      }
+
+      /* Ken Burns Effect Animation */
+      @keyframes kenBurnsEffect {
+        0% {
+          transform: scale(1.0) translate(0%, 0%);
+        }
+        25% {
+          transform: scale(1.05) translate(-1%, 1%); /* Pan slightly */
+        }
+        50% {
+            transform: scale(1.1) translate(-2%, 2%); /* Zoom in and pan */
+        }
+        75% {
+            transform: scale(1.05) translate(1%, -1%); /* Pan other way */
+        }
+        100% {
+          transform: scale(1.0) translate(0%, 0%); /* Return to origin for smooth loop or alternation */
+        }
+      }
+      .animate-kenBurnsActive {
+        /* A longer duration for a subtle effect. Adjust as needed.
+           'alternate' makes it go back and forth. 'infinite' makes it loop.
+           Consider tying this duration to sceneDuration from App.tsx via JS if very dynamic,
+           or keep it as a general long animation. For now, a fixed long duration is simpler.
+        */
+        animation: kenBurnsEffect 15s ease-in-out infinite alternate;
+        transform-origin: center center; /* Or dynamic based on scene for variety */
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.3.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!-- The React app will be injected here by index.tsx -->
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
